@@ -1,0 +1,10 @@
+{
+  "agents": [
+    {
+      "config": "agent_configs/Ask-Andrii.json",
+      "id": "agent_5701m123d6arfgmsfbwed193wq4n",
+      "version_id": "agtvrsn_3401m123g8v8esgvayc4v905trkt",
+      "branch_id": "agtbrch_8701m123d78req2bv4wsxb90cbby"
+    }
+  ]
+}

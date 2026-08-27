@@ -1,0 +1,15 @@
+{
+  "name": "showContact",
+  "description": "Reveals a contact panel with Andrii's email and LinkedIn. Call when the user asks how to reach or contact Andrii.",
+  "type": "client",
+  "expects_response": false,
+  "response_timeout_secs": 10,
+  "parameters": {
+    "type": "object",
+    "description": "Parameters for the client tool",
+    "properties": {}
+  },
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  }
+}

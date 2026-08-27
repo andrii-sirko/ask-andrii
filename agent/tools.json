@@ -1,0 +1,19 @@
+{
+  "tools": [
+    {
+      "type": "client",
+      "config": "tool_configs/highlightProject.json",
+      "id": "tool_2501m123dhm0eyna1ar3k5am147g"
+    },
+    {
+      "type": "client",
+      "config": "tool_configs/filterByTech.json",
+      "id": "tool_9301m123dvj4ehzbsy1xppfmpr49"
+    },
+    {
+      "type": "client",
+      "config": "tool_configs/showContact.json",
+      "id": "tool_8301m123dxwbezcsnz92wbknht72"
+    }
+  ]
+}

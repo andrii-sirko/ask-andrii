@@ -1,0 +1,21 @@
+{
+  "name": "highlightProject",
+  "description": "Scrolls to and visually highlights the project card the conversation is about. Call this whenever you talk about a specific employer or project. Returns a confirmation with the project name, or 'Unknown project id'.",
+  "type": "client",
+  "expects_response": true,
+  "response_timeout_secs": 10,
+  "parameters": {
+    "type": "object",
+    "description": "Parameters for the client tool",
+    "properties": {
+      "projectId": {
+        "type": "string",
+        "description": "The id of the project to highlight. One of the project ids listed in the system prompt, e.g. 'mehrwerk' or 'about-you'."
+      }
+    },
+    "required": ["projectId"]
+  },
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  }
+}

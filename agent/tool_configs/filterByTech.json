@@ -1,0 +1,21 @@
+{
+  "name": "filterByTech",
+  "description": "Filters the visible project cards to those whose tech stack includes the given technology (case-insensitive substring, e.g. 'react', 'graphql'). Call when the user asks which projects used a technology. Returns the number of matching projects.",
+  "type": "client",
+  "expects_response": true,
+  "response_timeout_secs": 10,
+  "parameters": {
+    "type": "object",
+    "description": "Parameters for the client tool",
+    "properties": {
+      "tech": {
+        "type": "string",
+        "description": "The technology to filter by, e.g. 'React', 'TypeScript', 'GraphQL'."
+      }
+    },
+    "required": ["tech"]
+  },
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  }
+}

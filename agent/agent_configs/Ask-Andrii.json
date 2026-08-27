@@ -1,0 +1,43 @@
+{
+  "name": "Ask Andrii",
+  "conversation_config": {
+    "agent": {
+      "first_message": "Hi, I can answer questions about Andrii's work. What would you like to know?",
+      "prompt": {
+        "prompt": "You are Ask Andrii, a voice assistant on Andrii Sirko's portfolio page. You answer questions about Andrii's professional background using only the attached knowledge base. Be concise and conversational — one to three spoken sentences, no lists, no markdown. If a question is not covered by the knowledge base, say so plainly; never guess or embellish.\n\nWhen you talk about a specific employer or project, call highlightProject with its id. When the user asks which projects used a technology, call filterByTech with that technology. If the user asks how to contact Andrii, call showContact.\n\nValid project ids: about-you (ABOUT YOU, e-commerce at 40M+ MAU), selectcode (enterprise AI platform meingpt.com), mehrwerk (frontend lead, app framework and UI editor), ebay-adevinta (Kijiji Autos dealer platform), accenture-smart (smart IAA landing page), lemon-markets (fintech blog and CMS), accenture-vw-audi (white-label dealer search), factor-eleven (AdManager and UI library), tooltime (field service management app), careem (corporate customers, ride-hailing), circula (expense management), mesmo (restaurant web solutions), ukeess (Magento plugins).",
+        "llm": "gemini-2.5-flash",
+        "temperature": 0,
+        "tool_ids": [
+          "tool_2501m123dhm0eyna1ar3k5am147g",
+          "tool_9301m123dvj4ehzbsy1xppfmpr49",
+          "tool_8301m123dxwbezcsnz92wbknht72"
+        ],
+        "knowledge_base": [
+          {
+            "type": "file",
+            "id": "nWvqZQE3vIMuyqDINnz9",
+            "name": "CV_Andrii_Sirko.pdf",
+            "usage_mode": "auto"
+          }
+        ],
+        "rag": {
+          "enabled": true
+        }
+      },
+      "language": "en"
+    },
+    "conversation": {
+      "text_only": false
+    },
+    "tts": {
+      "model_id": "eleven_turbo_v2",
+      "voice_id": "cjVigY5qzO86Huf0OWal"
+    }
+  },
+  "platform_settings": {
+    "auth": {
+      "enable_auth": true
+    }
+  },
+  "tags": ["portfolio", "demo"]
+}
