@@ -1,10 +1,99 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans:
-    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+:root {
+  --paper: #f4f3ee;
+  --card: #fdfdfb;
+  --ink: #1c1c18;
+  --muted: #6c6b62;
+  --line: #e2e0d6;
+  --accent: #b26a05;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #111114;
+    --card: #191920;
+    --ink: #e9e8e1;
+    --muted: #96958b;
+    --line: #27272e;
+    --accent: #e8a33d;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* VU-meter waveform: bars get a fixed height inline, states animate scaleY. */
+.vu-bar {
+  transform-origin: 50% 50%;
+  transform: scaleY(0.45);
+}
+
+.vu-connecting .vu-bar {
+  animation: vu-pulse 1.4s ease-in-out infinite;
+}
+
+.vu-listening .vu-bar {
+  animation: vu-bob 2.4s ease-in-out infinite;
+}
+
+.vu-speaking .vu-bar {
+  animation: vu-talk 0.9s ease-in-out infinite;
+}
+
+@keyframes vu-talk {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes vu-bob {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(0.65);
+  }
+}
+
+@keyframes vu-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.live-dot {
+  animation: vu-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .vu-bar,
+  .live-dot {
+    animation: none !important;
+  }
 }

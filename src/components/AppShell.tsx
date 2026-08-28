@@ -5,10 +5,10 @@ import { useConversationControls, useConversationStatus } from "@elevenlabs/reac
 import type { Project, contact as contactData } from "@/data/projects";
 import type { TranscriptEntry } from "@/lib/transcript";
 import { Header } from "@/components/Header";
+import { VoiceStage } from "@/components/VoiceStage";
 import { Transcript } from "@/components/Transcript";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { ContactPanel } from "@/components/ContactPanel";
-import { MicExplainer } from "@/components/MicExplainer";
 
 type Contact = typeof contactData;
 
@@ -41,12 +41,12 @@ export function AppShell({
   const { status, message: statusMessage } = useConversationStatus();
 
   const [textMode, setTextMode] = useState(false);
-  const [showMicExplainer, setShowMicExplainer] = useState(false);
   const [startError, setStartError] = useState<string | null>(null);
 
   const connectSession = useCallback(
     async (asTextMode: boolean) => {
       setStartError(null);
+      setTextMode(asTextMode);
       try {
         const res = await fetch("/api/signed-url");
         if (!res.ok) {
@@ -65,20 +65,6 @@ export function AppShell({
     [startSession],
   );
 
-  const handleStart = useCallback(() => {
-    if (textMode) {
-      void connectSession(true);
-    } else {
-      // Docs recommend explaining the mic permission before the browser asks.
-      setShowMicExplainer(true);
-    }
-  }, [textMode, connectSession]);
-
-  const handleMicConfirm = useCallback(() => {
-    setShowMicExplainer(false);
-    void connectSession(false);
-  }, [connectSession]);
-
   const handleSendText = useCallback(
     (text: string) => {
       appendTranscript("user", text);
@@ -92,22 +78,17 @@ export function AppShell({
 
   return (
     <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 sm:px-6">
-      <Header
+      <Header status={status} pingMs={pingMs} onShowContact={onToggleContact} />
+
+      <VoiceStage
         status={status}
         errorText={errorText}
-        pingMs={pingMs}
-        textMode={textMode}
-        onToggleTextMode={() => setTextMode((v) => !v)}
-        onStart={handleStart}
+        onStartVoice={() => void connectSession(false)}
+        onStartText={() => void connectSession(true)}
         onEnd={endSession}
-        onShowContact={onToggleContact}
       />
 
-      {showMicExplainer && (
-        <MicExplainer onConfirm={handleMicConfirm} onCancel={() => setShowMicExplainer(false)} />
-      )}
-
-      <main className="grid flex-1 gap-8 py-8 lg:grid-cols-[minmax(0,1fr)_360px]">
+      <main className="grid flex-1 gap-8 pb-10 lg:grid-cols-[minmax(0,1fr)_360px]">
         <div className="order-2 lg:order-1">
           <ProjectsGrid
             projects={projects}
@@ -117,21 +98,20 @@ export function AppShell({
           />
         </div>
         <div className="order-1 lg:order-2">
-          <Transcript
-            entries={transcript}
-            connected={status === "connected"}
-            textMode={textMode}
-            onSendText={handleSendText}
-          />
-          {contactOpen && <ContactPanel contact={contact} onClose={onToggleContact} />}
+          <div className="space-y-4 lg:sticky lg:top-6">
+            <Transcript
+              entries={transcript}
+              connected={status === "connected"}
+              textMode={textMode}
+              onSendText={handleSendText}
+            />
+            {contactOpen && <ContactPanel contact={contact} onClose={onToggleContact} />}
+          </div>
         </div>
       </main>
 
-      <footer className="border-t border-neutral-200 py-6 text-sm text-neutral-500 dark:border-neutral-800 dark:text-neutral-400">
-        <a
-          href="https://github.com/andrii-sirko/ask-andrii"
-          className="underline hover:text-neutral-900 dark:hover:text-neutral-100"
-        >
+      <footer className="border-t border-line py-6 font-mono text-xs text-muted">
+        <a href="https://github.com/andrii-sirko/ask-andrii" className="underline hover:text-ink">
           Source on GitHub
         </a>{" "}
         · Built with ElevenLabs Agents + Next.js

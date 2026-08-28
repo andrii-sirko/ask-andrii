@@ -10,23 +10,24 @@ export function MicExplainer({ onConfirm, onCancel }: MicExplainerProps) {
     <div
       role="dialog"
       aria-label="Microphone permission"
-      className="mt-4 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm dark:border-amber-700 dark:bg-amber-950/40"
+      className="max-w-md rounded-2xl border border-accent/40 bg-card p-5 text-left text-sm"
     >
-      <p>
+      <p className="font-mono text-xs tracking-widest text-accent uppercase">Mic check</p>
+      <p className="mt-2 leading-relaxed">
         This is a live voice conversation — your browser will ask for microphone access next. Audio
-        is streamed to ElevenLabs only while the session is active. No mic? Use{" "}
-        <strong>text mode</strong> instead (checkbox in the header).
+        is streamed to ElevenLabs only while the session is active. No mic? Cancel and pick{" "}
+        <strong>Type instead</strong>.
       </p>
-      <div className="mt-3 flex gap-2">
+      <div className="mt-4 flex gap-2">
         <button
           onClick={onConfirm}
-          className="rounded-lg bg-neutral-900 px-4 py-1.5 font-medium text-white hover:bg-neutral-700 dark:bg-neutral-100 dark:text-neutral-900"
+          className="rounded-full bg-ink px-5 py-2 font-medium text-paper hover:opacity-85"
         >
           Continue
         </button>
         <button
           onClick={onCancel}
-          className="rounded-lg border border-neutral-300 px-4 py-1.5 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-800"
+          className="rounded-full border border-line px-5 py-2 hover:border-ink/40"
         >
           Cancel
         </button>
